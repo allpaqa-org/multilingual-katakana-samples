@@ -24,6 +24,7 @@ npm start                      # examples/01-basic.mjs を実行
 node examples/01-basic.mjs
 node examples/02-options.mjs
 node examples/03-streaming-comment.mjs
+cd node-native && npm install && npm start
 ```
 
 ## サンプル一覧
@@ -33,6 +34,12 @@ node examples/03-streaming-comment.mjs
 | [`examples/01-basic.mjs`](examples/01-basic.mjs) | 最もシンプルな使い方。英語・韓国語・中国語・ロシア語・スペイン語の配信コメントに `toKatakana(text)` を適用。 |
 | [`examples/02-options.mjs`](examples/02-options.mjs) | `KatakanaOptions` の使い方。言語フラグの無効化や、`exclude` によるURL/メンションの変換保護。 |
 | [`examples/03-streaming-comment.mjs`](examples/03-streaming-comment.mjs) | VTuber/配信での実用例。ライブチャットの読み上げと、Safe Kanji Guard（日本語の漢字コメントを中国語ピンインと誤認せずそのまま維持する仕組み）のデモ。 |
+| [`node-native/`](node-native) | 将来のネイティブバックエンド公開を見据えたNode.jsサンプル。現時点では通常のnpm配布物としてPure TypeScript実装に自動フォールバックしつつ、issue [#15](https://github.com/allpaqa-org/multilingual-katakana/issues/15) が完了すれば同じコードのままネイティブ実装の恩恵を受けられます。 |
+
+> 現在は有効なバックエンドを判定する公開APIがないため、
+> `node-native/` サンプルで確認できるのは「使い方が同じこと」と
+> 「おおまかな実行時間」までです。厳密な判定APIについては issue
+> [#18](https://github.com/allpaqa-org/multilingual-katakana/issues/18) を参照してください。
 
 ## 必要環境
 

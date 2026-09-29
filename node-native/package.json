@@ -1,0 +1,11 @@
+{
+  "name": "node-native-sample",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node run.mjs"
+  },
+  "dependencies": {
+    "@allpaqa/multilingual-katakana": "^0.3.0"
+  }
+}
