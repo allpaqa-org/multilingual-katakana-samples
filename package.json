@@ -1,0 +1,14 @@
+{
+  "name": "multilingual-katakana-samples",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal, copy-pasteable sample scripts for @allpaqa/multilingual-katakana \u2014 just import and convert.",
+  "scripts": {
+    "start": "node examples/01-basic.mjs"
+  },
+  "dependencies": {
+    "@allpaqa/multilingual-katakana": "^0.3.0"
+  },
+  "license": "MIT"
+}
