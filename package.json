@@ -9,7 +9,7 @@
     "test": "node scripts/verify-examples.mjs"
   },
   "dependencies": {
-    "@allpaqa/multilingual-katakana": "^0.4.0"
+    "@allpaqa/multilingual-katakana": "^0.4.1"
   },
   "license": "MIT"
 }
