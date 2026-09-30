@@ -29,12 +29,25 @@ function check(name, fn) {
   }
 }
 
+const KATAKANA_PATTERN = /[\u30A0-\u30FF]/;
+
 check("examples/01-basic.mjs runs and converts every sample line", () => {
   const output = run("examples/01-basic.mjs");
   const lines = output.trim().split("\n");
   assert.equal(lines.length, 5, "expected exactly 5 output lines");
   for (const line of lines) {
-    assert.match(line, /^.+ {2}->\s{2}\S.+$/, `line missing "-> <output>": ${line}`);
+    const [original, converted] = line.split("  ->  ");
+    assert.ok(converted, `line missing "-> <output>": ${line}`);
+    assert.notEqual(
+      converted,
+      original,
+      `line was not actually converted (output equals input): ${line}`,
+    );
+    assert.match(
+      converted,
+      KATAKANA_PATTERN,
+      `expected converted output to contain katakana: ${line}`,
+    );
   }
 });
 
