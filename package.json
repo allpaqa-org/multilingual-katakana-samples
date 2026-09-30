@@ -5,7 +5,8 @@
   "type": "module",
   "description": "Minimal, copy-pasteable sample scripts for @allpaqa/multilingual-katakana \u2014 just import and convert.",
   "scripts": {
-    "start": "node examples/01-basic.mjs"
+    "start": "node examples/01-basic.mjs",
+    "test": "node scripts/verify-examples.mjs"
   },
   "dependencies": {
     "@allpaqa/multilingual-katakana": "^0.3.0"

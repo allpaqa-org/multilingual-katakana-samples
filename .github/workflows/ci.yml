@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify-examples:
+    name: Verify samples run and produce expected output
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install root sample dependencies
+        run: npm install --no-audit --no-fund
+
+      # node-native/ has its own package.json (pinned to a version that
+      # includes the native-backend loader) and installs itself; see
+      # scripts/verify-examples.mjs.
+      - name: Verify examples
+        run: npm test
