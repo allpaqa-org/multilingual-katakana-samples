@@ -5,7 +5,7 @@ on:
     branches: [main]
   pull_request:
   # No lockfile is committed (this repo intentionally stays "copy-paste
-  # friendly"), so `^0.4.0` can silently resolve to a newer published
+  # friendly"), so `^0.4.1` can silently resolve to a newer published
   # version between PRs. Run on a schedule too so an upstream release that
   # breaks a sample surfaces on its own instead of waiting for the next PR.
   schedule:

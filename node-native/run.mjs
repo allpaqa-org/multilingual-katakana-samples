@@ -1,7 +1,7 @@
 // run.mjs
 // This sample uses the same public API regardless of whether the package
-// ends up running on a future native backend or today's pure TypeScript
-// fallback.
+// ends up running on the native backend (available since v0.4.1, see
+// multilingual-katakana#15) or the pure TypeScript fallback.
 import { toKatakana } from "@allpaqa/multilingual-katakana";
 
 const samples = [
@@ -20,12 +20,12 @@ for (const sample of samples) {
 // Safe-Failure fallback check: MULTILINGUAL_KATAKANA_BACKEND=js forces the
 // pure-TypeScript pipeline, while leaving it unset ("auto") lets the loader
 // pick the fastest backend available on this machine. Comparing the two
-// proves the public API produces identical output either way. Today,
-// "auto" also resolves to pure-TS (native binaries aren't published yet,
-// see multilingual-katakana#15), so this mostly documents the mechanism —
-// once native packages ship, "auto" may pick the native backend and this
-// same check becomes a real cross-backend parity proof, with no changes
-// needed to this script.
+// proves the public API produces identical output either way. Since v0.4.1,
+// native platform packages are published for all 8 Tier 1 targets (see
+// multilingual-katakana#15), so on a supported platform "auto" now picks
+// the native backend automatically — this check is a real cross-backend
+// parity proof, with no changes needed to this script on unsupported
+// platforms (which still fall back to pure-TS).
 console.log("");
 console.log("=== Backend parity check (forced \"js\" vs \"auto\") ===");
 const convertAll = (texts) => texts.map((text) => toKatakana(text));
@@ -75,11 +75,8 @@ if (elapsedMs > 0) {
 }
 console.log("");
 console.log(
-  "Note: native binaries are not published yet, so npm installs currently use the pure-TS fallback.",
-);
-console.log(
-  "Once per-platform native packages ship in a future release, upgrading the dependency is enough " +
-    "to pick them up \u2014 no application code changes needed.",
+  "Note: since v0.4.1, npm installs on a supported platform (8 Tier 1 targets) automatically use " +
+    "the native backend; unsupported platforms fall back to pure-TS \u2014 no application code changes needed either way.",
 );
 console.log(
   "There is also no public API yet to definitively report which backend is active at runtime.",

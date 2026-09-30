@@ -90,7 +90,7 @@ check("examples/03-streaming-comment.mjs applies the Safe Kanji Guard", () => {
   );
 });
 
-check("node-native/run.mjs installs on ^0.4.0 and reports backend parity", () => {
+check("node-native/run.mjs installs on ^0.4.1 and reports backend parity", () => {
   const nodeNativeDir = new URL("../node-native/", import.meta.url);
   execFileSync("npm", ["install", "--no-audit", "--no-fund"], {
     cwd: nodeNativeDir,
