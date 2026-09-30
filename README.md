@@ -35,7 +35,7 @@ cd node-native && npm install && npm start
 | [`examples/01-basic.mjs`](examples/01-basic.mjs) | The simplest possible usage: `toKatakana(text)` on a handful of multilingual chat comments (English, Korean, Chinese, Russian, Spanish). |
 | [`examples/02-options.mjs`](examples/02-options.mjs) | `KatakanaOptions`: disabling a language flag, and protecting URLs/@mentions from conversion with `exclude`. |
 | [`examples/03-streaming-comment.mjs`](examples/03-streaming-comment.mjs) | A realistic VTuber/streaming use case: reading a live chat feed aloud, including the Safe Kanji Guard (Japanese kanji comments pass through untouched instead of being misread as Chinese pinyin). |
-| [`node-native/`](node-native) | A Node.js sample for the future native backend path: the script uses the normal package API today, demonstrates Safe-Failure fallback behavior, and will automatically benefit from native binaries once issue [#15](https://github.com/allpaqa-org/multilingual-katakana/issues/15) lands. |
+| [`node-native/`](node-native) | A Node.js sample for the future native backend path: the script uses the normal package API today, checks output parity across forced `js`/`auto` backend modes, and — once per-platform native packages ship (issue [#15](https://github.com/allpaqa-org/multilingual-katakana/issues/15)) — an upgrade of the dependency is enough to benefit from them, with no code changes. |
 
 > There is currently no public backend-introspection API, so the
 > `node-native/` sample demonstrates identical usage and rough timing, not

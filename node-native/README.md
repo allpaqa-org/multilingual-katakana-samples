@@ -10,8 +10,13 @@ backend executes underneath `@allpaqa/multilingual-katakana`.
   still runs on the pure TypeScript backend because per-platform native
   packages are tracked separately in
   [allpaqa-org/multilingual-katakana#15](https://github.com/allpaqa-org/multilingual-katakana/issues/15).
-  Once those binaries are published, this exact sample will pick them up
-  automatically with no application code changes.
+  Once native packages ship in a future release, upgrading the dependency
+  is enough to pick them up — no application code changes needed.
+- **Backend parity check:** the script forces `MULTILINGUAL_KATAKANA_BACKEND=js`
+  for one pass and leaves it unset ("auto") for another, then confirms both
+  produce identical output. Today "auto" also resolves to pure-TS, so this
+  mostly documents the mechanism; once native binaries are available, the
+  same check becomes a real cross-backend parity proof.
 - **No public backend introspection API yet:** there is currently no
   supported `getBackend()`-style API to definitively tell which backend is
   active at runtime; that is tracked in
