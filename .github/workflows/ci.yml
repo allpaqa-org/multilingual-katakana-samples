@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # No lockfile is committed (this repo intentionally stays "copy-paste
+  # friendly"), so `^0.4.0` can silently resolve to a newer published
+  # version between PRs. Run on a schedule too so an upstream release that
+  # breaks a sample surfaces on its own instead of waiting for the next PR.
+  schedule:
+    - cron: "0 6 * * 1" # every Monday 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  verify-examples:
+    name: Verify samples run and produce expected output
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install root sample dependencies
+        run: npm install --no-audit --no-fund
+
+      # node-native/ has its own package.json (pinned to a version that
+      # includes the native-backend loader) and installs itself; see
+      # scripts/verify-examples.mjs.
+      - name: Verify examples
+        run: npm test
