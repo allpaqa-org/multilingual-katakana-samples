@@ -17,9 +17,12 @@ backend executes underneath `@allpaqa/multilingual-katakana`.
   still fall back to the pure TypeScript backend automatically.
 - **Backend parity check:** the script forces `MULTILINGUAL_KATAKANA_BACKEND=js`
   for one pass and leaves it unset ("auto") for another, then confirms both
-  produce identical output. On a supported platform "auto" now resolves to
-  the native backend, so this is a real cross-backend parity proof; on
-  unsupported platforms it still documents the pure-TS fallback mechanism.
+  produce identical output. On a supported platform with the optional native
+  package installed, "auto" exercises the native backend, so this check
+  compares native vs. pure-TS output; if the native package is skipped (e.g.
+  `--omit=optional`) or unavailable, "auto" quietly falls back to pure-TS and
+  the check still passes, so identical output alone does not prove which
+  backend actually ran (see the note below).
 - **No public backend introspection API yet:** there is currently no
   supported `getBackend()`-style API to definitively tell which backend is
   active at runtime; that is tracked in
@@ -37,4 +40,4 @@ npm start
 
 The script prints a few multilingual conversions and a small repeated-loop
 timing measurement. Now that native binaries are available (v0.4.1+),
-consumers did not need to change any code to benefit from them.
+consumers don't need to change any code to benefit from them.

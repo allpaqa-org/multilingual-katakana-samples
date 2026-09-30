@@ -22,10 +22,12 @@ for (const sample of samples) {
 // pick the fastest backend available on this machine. Comparing the two
 // proves the public API produces identical output either way. Since v0.4.1,
 // native platform packages are published for all 8 Tier 1 targets (see
-// multilingual-katakana#15), so on a supported platform "auto" now picks
-// the native backend automatically — this check is a real cross-backend
-// parity proof, with no changes needed to this script on unsupported
-// platforms (which still fall back to pure-TS).
+// multilingual-katakana#15), so on a supported platform with the optional
+// native package installed, "auto" exercises the native backend here; if
+// the native package is skipped or unavailable, "auto" quietly falls back
+// to pure-TS and the check still passes — so identical output alone isn't
+// definitive proof of which backend ran. No changes are needed to this
+// script either way, on supported or unsupported platforms.
 console.log("");
 console.log("=== Backend parity check (forced \"js\" vs \"auto\") ===");
 const convertAll = (texts) => texts.map((text) => toKatakana(text));
@@ -76,7 +78,8 @@ if (elapsedMs > 0) {
 console.log("");
 console.log(
   "Note: since v0.4.1, npm installs on a supported platform (8 Tier 1 targets) automatically use " +
-    "the native backend; unsupported platforms fall back to pure-TS \u2014 no application code changes needed either way.",
+    "the native backend when the optional package is installed; unsupported (or opted-out) platforms " +
+    "fall back to pure-TS \u2014 no application code changes needed either way.",
 );
 console.log(
   "There is also no public API yet to definitively report which backend is active at runtime.",
