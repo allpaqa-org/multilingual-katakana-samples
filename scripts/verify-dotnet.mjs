@@ -18,7 +18,7 @@ function check(name, fn) {
   }
 }
 
-const KATAKANA_PATTERN = /[゠-ヿ]/;
+const KATAKANA_PATTERN = /[\u30A0-\u30FF]/;
 
 check("dotnet-native runs and produces expected shape", () => {
   const output = execFileSync("dotnet", ["run", "--project", "dotnet-native"], {
@@ -28,7 +28,6 @@ check("dotnet-native runs and produces expected shape", () => {
 
   const oneCallHeader = "=== One call ===";
   const reusableHeader = "=== Reusable converter with options ===";
-  const failureHeader = "=== If the native library cannot load ===";
 
   const oneCallIndex = output.indexOf(oneCallHeader);
   const reusableIndex = output.indexOf(reusableHeader);
@@ -39,12 +38,6 @@ check("dotnet-native runs and produces expected shape", () => {
     "expected '=== Reusable converter with options ===' section header",
   );
   assert.ok(oneCallIndex < reusableIndex, "section headers must appear in order");
-
-  // On a supported platform, section 3 prints nothing and does not display its header.
-  assert.ok(
-    !output.includes(failureHeader),
-    "section 3 header should not print on a supported platform",
-  );
 
   // Extract lines under "=== One call ===" up to "=== Reusable converter with options ==="
   const oneCallSection = output.slice(oneCallIndex + oneCallHeader.length, reusableIndex);

@@ -1,9 +1,8 @@
 using Allpaqa.MultilingualKatakana;
 
-// The entire program is wrapped in a try/catch block to handle KatakanaException.
-// The .NET package is native-only (shipping for 9 RIDs) with no managed fallback.
-// If the native library cannot be loaded on an unsupported platform or due to a
-// missing native asset, KatakanaException is thrown.
+// The whole program is wrapped in a try/catch block because the native library
+// is loaded on the first call, which is where loading can fail on an unsupported
+// platform or when native assets are missing.
 try
 {
     // === 1. One call ===
@@ -36,12 +35,16 @@ try
     const string mixedText = "你好 thank you";
     Console.WriteLine($"{mixedText}  ->  {converter.Convert(mixedText)}");
 }
-catch (KatakanaException ex)
+catch (KatakanaException ex) when (ex.StatusCode is null)
 {
-    // === 3. If the native library cannot load ===
+    // === 3. .NET-specific: if the native library cannot load ===
+    // StatusCode is null exactly for load/initialization failures; other codes
+    // (1 null pointer, 2 invalid UTF-8, 3 panic in the core) are not load failures
+    // and are left to surface.
     // On a supported platform this section prints nothing.
-    // When the native library fails to load, write an explanatory message to stderr and exit with code 1.
     Console.Error.WriteLine("=== If the native library cannot load ===");
     Console.Error.WriteLine($"The native library could not be loaded on this platform: {ex.Message}");
-    Environment.Exit(1);
+    return 1;
 }
+
+return 0;
