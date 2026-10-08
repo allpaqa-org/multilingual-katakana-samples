@@ -25,8 +25,8 @@ Or run any example directly:
 node examples/01-basic.mjs
 node examples/02-options.mjs
 node examples/03-streaming-comment.mjs
-cd node-native && npm install && npm start
 dotnet run --project dotnet-native
+cd node-native && npm install && npm start
 ```
 
 ## Examples
