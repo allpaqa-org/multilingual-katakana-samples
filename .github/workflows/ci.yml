@@ -34,3 +34,20 @@ jobs:
       # scripts/verify-examples.mjs.
       - name: Verify examples
         run: npm test
+
+  verify-dotnet:
+    name: Verify .NET sample
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify .NET sample
+        run: npm run test:dotnet
