@@ -1,2 +1,4 @@
 node_modules/
 package-lock.json
+dotnet-native/bin/
+dotnet-native/obj/
